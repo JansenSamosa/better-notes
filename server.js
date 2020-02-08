@@ -11,6 +11,7 @@ mongoose.connect(config.get('mongoURI'), {useNewUrlParser: true, useUnifiedTopol
     .catch(err => console.log(err))
 
 app.use('/api/auth', require('./routes/api/auth.js'))
+app.use('/api/boards', require('./routes/api/board.js'))
 
 const PORT = process.env.PORT || 5000
 

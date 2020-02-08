@@ -1,0 +1,90 @@
+.auth-base {
+    width: 350px;
+    height: 500px;
+    padding: 15px;
+    background-color: #333333;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -250px 0 0 -175px;
+    box-shadow: -4px 4px 10px gray;
+}
+.auth-base h1 {
+    color: #eeeeee;
+    padding: 5px;
+    font-weight: normal;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-bottom: 2px solid #eeeeee;
+}
+
+
+.auth-register-form input{
+    margin:20px;
+    margin-top:20px;
+    width: 280px;
+    height: 30px;
+    padding: 10px;
+}
+
+.auth-login-form input{
+    margin:20px;
+    margin-top:40px;
+    width: 280px;
+    height: 30px;
+    padding: 10px;
+}
+
+.auth-register-form input[type='submit'], .auth-login-form input[type='submit']{
+    width: 75px;
+    height: 50px;
+    border-radius: 62px;
+    border: none;
+    margin-left: 50%;
+    position: relative;
+    left:-37.5px;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.auth-error {
+    width:85%;
+    height:50px;
+    margin:auto;
+    margin-top:15px;
+    background-color: #ff9999;
+    border: 2px solid #ff4d4d;
+    text-align: center;
+    border-radius: 10px;
+    opacity: 80%;
+}
+
+.auth-error p {
+    font-size: 20px;
+    line-height: 40px;
+    color: #cc0000;
+}
+
+.auth-success {
+    width:85%;
+    height:50px;
+    margin:auto;
+    margin-top:15px;
+    background-color: #b3ffb3;
+    border: 2px solid #1aff1a;
+    text-align: center;
+    border-radius: 10px;
+    opacity: 80%;
+}
+.auth-success p {
+    font-size: 20px;
+    line-height: 40px;
+    color: #00b300;
+}
+
+#to-register, #to-login {
+    color:#eeeeee;
+    text-align: center;
+}
+#to-register a, #to-login a {
+    color: #eeeeee;
+}

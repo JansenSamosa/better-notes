@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://Jansen:orangeandgreenspot11@db1-qqobg.gcp.mongodb.net/betternotes?retryWrites=true&w=majority",
+    "jwtSecret": "orangeandgreenspot11"
+}

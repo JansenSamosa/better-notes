@@ -5,6 +5,8 @@ import { Provider } from 'react-redux'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 
+import Navbar from './components/overlay/Navbar.js'
+
 import { loadUser, logoutUser } from './actions/authActions.js'
 
 import store from './store.js'
@@ -14,11 +16,12 @@ export class App extends Component {
   componentDidMount() {
     store.dispatch(loadUser())
   }
-
-  authButtons = () => {
+  notesRender = () => {
     if(store.getState().auth.token !== null) {
       return (
-        <button onClick={() => {store.dispatch(logoutUser()); this.forceUpdate()}}>Logout</button>
+        <div>
+          <Navbar />
+        </div>
       )
       
     } else {
@@ -27,7 +30,7 @@ export class App extends Component {
       )
     }
   }
-  render() { 
+  render() {
     return (  
       <div className='App'>
         <Provider store={store} >
@@ -40,7 +43,7 @@ export class App extends Component {
                 <Register />
               </Route>
               <Route path='/'>
-                {this.authButtons()}
+                {this.notesRender()}
               </Route>
             </Switch>
           </Router>

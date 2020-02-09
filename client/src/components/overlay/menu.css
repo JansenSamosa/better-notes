@@ -1,0 +1,47 @@
+.nav-menu-open {
+    position: fixed;
+    background-color: #39414E;
+    height: 100%;
+    width: 250px;
+    box-shadow:1px 5px 3px black;
+    animation-name: open;
+    animation-duration: 250ms;
+    animation-iteration-count: 1;
+}
+@keyframes open {
+    from {left:-250px}
+    to {left: 0}
+}
+
+.nav-menu-closed {
+    position: fixed;
+    background-color: #39414E;
+    height: 100%;
+    width: 250px;
+    box-shadow:1px 5px 3px black;
+    animation-name: close;
+    animation-duration: 250ms;
+    animation-iteration-count: 1;
+    left: -260px;
+}
+@keyframes close {
+    from {left: 0}
+    to {left:-250px}
+}
+
+.nav-menu-logout {
+    position: absolute;
+    bottom:0;
+    width:100%;
+    height: 7%;
+    border: none;
+    background-color: rgba(255, 255, 255, 30%);
+    color: #eeeeee;
+    cursor: pointer;
+}
+.nav-menu-logout:hover {
+    background-color: rgba(255, 255, 255, 20%);
+}
+.nav-menu-logout img {
+    height:35px;
+}

@@ -7,7 +7,7 @@ import Register from './components/auth/Register'
 
 import Navbar from './components/overlay/Navbar.js'
 
-import { loadUser, logoutUser } from './actions/authActions.js'
+import { loadUser } from './actions/authActions.js'
 
 import store from './store.js'
 import './App.css'

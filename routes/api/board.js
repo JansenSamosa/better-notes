@@ -11,7 +11,8 @@ const router = express.Router()
 //PRIVATE
 router.get('/myboards', authMiddleWare, (req, res) => {
     Board.find({ownerID: req.userid}, (err, boards) => {
-        res.json(boards)
+        condBoards = boards.map(board => ({name: board.name, id: board._id}))
+        res.json(condBoards)
     })
     
 })
@@ -31,8 +32,8 @@ router.get('/myboards/:id', authMiddleWare, (req, res) => {
 //updates board
 //PRIVATE
 router.put('/myboards/:id/update', authMiddleWare, (req,res) => {
-    const newNotes = req.body.notes
-    Board.findOneAndUpdate({_id: req.params.id, ownerID: req.userid}, {notes: newNotes},{useFindAndModify: false, new: true}, (err, board) => {
+    const {name, notes} = req.body
+    Board.findOneAndUpdate({_id: req.params.id, ownerID: req.userid}, {name, notes},{useFindAndModify: false, new: true}, (err, board) => {
         if(!board) return res.status(400).json({msg: 'A board of this id and user doesnt exist'})
         res.json(board)
     })
@@ -52,12 +53,12 @@ router.delete('/myboards/:id', authMiddleWare, (req,res) => {
 //creates a new board
 //PRIVATE
 router.post('/myboards/newboard', authMiddleWare, (req, res) => {
-    const { name, notes} = req.body
+    const { name } = req.body
     
     const newBoard = new Board({
         name, 
         ownerID: req.userid, 
-        notes
+        notes: []
     })
 
     newBoard.save()

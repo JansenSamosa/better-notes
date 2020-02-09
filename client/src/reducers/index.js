@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 import authReducer from './authReducer.js';
 import errorReducer from './errorReducer.js';
+import boardReducer from './boardReducer.js';
 
 /* createStore requites the 1st argument(rootReducer) to be a function, hence
 why we are exporting a function. */
@@ -14,5 +15,6 @@ reducer you make */
 
 export default combineReducers({
     auth: authReducer,
-    error: errorReducer
+    error: errorReducer,
+    boards: boardReducer
 })

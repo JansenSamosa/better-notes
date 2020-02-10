@@ -16,16 +16,14 @@
 }
 
 .nav-bar-menubutton {
-    animation-name: shrink;
-    animation-duration: 200ms;
-    animation-iteration-count: 1;
     position: absolute;
     left: 12px;
     top: 12px;
     width:35px;
     height:25px;
     background: none;
-    cursor: pointer;  
+    cursor: pointer; 
+    transition: width 200ms, height 200ms;
 }
 @keyframes shrink {
     0% {width: 40px; height: 30px;}
@@ -33,9 +31,7 @@
 }
 
 .nav-bar-menubutton:hover {
-    animation-name: enlarge;
-    animation-duration: 200ms;
-    animation-iteration-count: 1;
+    
     width: 40px; 
     height: 30px;
 }

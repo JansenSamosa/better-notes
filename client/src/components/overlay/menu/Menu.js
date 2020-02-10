@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { logoutUser } from '../../actions/authActions.js'
-import { getBoard } from '../../actions/boardActions'
+import MenuBoards from './MenuBoards.js'
+import { logoutUser } from '../../../actions/authActions.js'
+import { getAllBoards } from '../../../actions/boardActions'
 
-import logoutIcon from '../../icons/logouticon.png'
+import logoutIcon from '../../../icons/logouticon.png'
 import './menu.css'
 
 export class Menu extends Component {
@@ -24,6 +25,7 @@ export class Menu extends Component {
     }
     getClassName = () => {
         if(this.props.open) {
+            this.props.getAllBoards()
             return 'nav-menu-open'
         }else if (!this.props.open) {
             return 'nav-menu-closed'
@@ -33,9 +35,7 @@ export class Menu extends Component {
         return (
             <div style={{position:'absolute', top:'0', left:'0'}} >
                 <div className={this.getClassName()}>
-                    <button onClick={() => this.props.getBoard('5e405de59945ff54dcf8e885')}>
-                        asdas
-                    </button>
+                    <MenuBoards />
                     <button 
                         className='nav-menu-logout' 
                         onClick={this.logout}
@@ -49,4 +49,4 @@ export class Menu extends Component {
     }
 }
 
-export default connect(null, {logoutUser, getBoard})(Menu)
+export default connect(null, {logoutUser, getAllBoards})(Menu)

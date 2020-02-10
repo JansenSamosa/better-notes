@@ -16,7 +16,7 @@ export class App extends Component {
   componentDidMount() {
     store.dispatch(loadUser())
   }
-  notesRender = () => {
+  boardsRender = () => {
     if(store.getState().auth.token !== null) {
       return (
         <div>
@@ -42,8 +42,8 @@ export class App extends Component {
               <Route path='/register'>
                 <Register />
               </Route>
-              <Route path='/'>
-                {this.notesRender()}
+              <Route path='/boards'>
+                {this.boardsRender()}
               </Route>
             </Switch>
           </Router>

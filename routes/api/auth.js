@@ -26,7 +26,7 @@ router.post('/login', (req, res) => {
                         if(isMatch) {
                             jwt.sign({id: user.id}, 
                                 config.get('jwtSecret'), 
-                                { expiresIn: '1h'},
+                                { expiresIn: '7d'},
                                 (err, token) => {
                                     if(err) throw err
                                     res.json({token: token, user: user})

@@ -3,24 +3,24 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import MenuBoards from './MenuBoards.js'
-import { logoutUser } from '../../../actions/authActions.js'
-import { getAllBoards } from '../../../actions/boardActions'
+import { logoutUser } from '../../../../actions/authActions.js'
+import { getAllBoards } from '../../../../actions/boardActions'
 
-import logoutIcon from '../../../icons/logouticon.png'
+import homeIcon from '../../../../icons/homeicon.png'
 import './menu.css'
 
 export class Menu extends Component {
     state = {
-        logoutRed: false
+        redirect: false,
+        redirectTo: null
     }
-    logout = () => {
-        this.props.logoutUser()
-        this.setState({logoutRed: true})
+    toHome = () => {
+        this.setState({redirect: true, redirectTo:'/'})
     }
     redirects = () => {
-        if(this.state.logoutRed) {
-            this.setState({logoutRed:false})
-            return <Redirect to='/login' />
+        if(this.state.redirect && this.state.redirectTo === '/') {
+            this.setState({redirect: false, redirectTo:null})
+            return <Redirect to='/' />
         }
     }
     getClassName = () => {
@@ -37,10 +37,10 @@ export class Menu extends Component {
                 <div className={this.getClassName()}>
                     <MenuBoards />
                     <button 
-                        className='nav-menu-logout' 
-                        onClick={this.logout}
+                        className='nav-menu-homebutton' 
+                        onClick={this.toHome}
                     > 
-                        <img src={logoutIcon} alt=''></img> 
+                        <img src={homeIcon} alt=''></img> 
                     </button>
                 </div>
                 {this.redirects()}

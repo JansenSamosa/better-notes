@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getBoard } from '../../../actions/boardActions'
+import { getBoard } from '../../../../actions/boardActions'
 import './menu.css'
 
 export class MenuBoards extends Component {

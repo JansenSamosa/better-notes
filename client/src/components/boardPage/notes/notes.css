@@ -1,0 +1,45 @@
+.notes-container {
+    width: 98%;
+    position: absolute;
+    top: 70px;
+    left: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding-bottom: 500px;
+}
+
+.notes-note {
+    background-color: white;
+    align-self: flex-start;
+    margin:10px;
+    padding:10px;
+    min-width: 100px;
+    min-height: 100px;
+    box-shadow: -3px 3px 3px darkgray;
+    position: relative;
+}
+
+.notes-note img {
+    width:20px;
+    position: absolute;
+    right:5px;
+    bottom:5px;
+    cursor: pointer;
+    transition: width 100ms;
+}
+.notes-note img:hover {
+    width:25px;
+}
+
+.notes-note-li {
+    font-size: 90%;
+    margin-left:20px;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+.notes-note-header {
+    font-weight: bold;
+    font-size: 120%;
+}

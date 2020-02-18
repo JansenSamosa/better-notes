@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
-
-import Navbar from './components/overlay/Navbar.js'
+import BoardPage from './components/boardPage/BoardPage'
+import BoardsPage from './components/boardsPage/BoardsPage'
+import HomePage from './components/homePage/HomePage'
 
 import { loadUser } from './actions/authActions.js'
 
@@ -16,35 +17,18 @@ export class App extends Component {
   componentDidMount() {
     store.dispatch(loadUser())
   }
-  boardsRender = () => {
-    if(store.getState().auth.token !== null) {
-      return (
-        <div>
-          <Navbar />
-        </div>
-      )
-      
-    } else {
-      return (
-        <Link to='/login'> Login</Link>
-      )
-    }
-  }
+
   render() {
     return (  
       <div className='App'>
         <Provider store={store} >
           <Router>
             <Switch>
-              <Route path='/login'>
-                <Login />
-              </Route>
-              <Route path='/register'>
-                <Register />
-              </Route>
-              <Route path='/boards'>
-                {this.boardsRender()}
-              </Route>
+              <Route path='/login' component={Login} />
+              <Route path='/register' component={Register} />
+              <Route path='/boards/:id' component={BoardPage} />
+              <Route path='/boards' component={BoardsPage} />
+              <Route path='/' component={HomePage} />
             </Switch>
           </Router>
         </Provider>

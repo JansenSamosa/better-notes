@@ -18,3 +18,8 @@ export const GET_ALL_BOARDS = 'GET_ALL_BOARDS'
 export const DELETE_BOARD = 'DELETE_BOARD'
 export const BOARD_LOADING = 'BOARD_LOADING'
 export const BOARD_LOADED = 'BOARD_LOADED'
+
+//NOTE TYPES
+export const ADD_NOTE = 'ADD_NOTE'
+export const DEL_NOTE = 'DEL_NOTE'
+export const SAVE_NOTE = 'SAVE_NOTE'

@@ -1,0 +1,16 @@
+.uni-nav-homebtn {
+    background-color: #39414E;
+    position:fixed;
+    left: 0;
+    top: 0;
+    height:3%;
+    padding:.5%;
+    cursor: pointer;
+    transition: height 100ms;
+}
+
+.uni-nav-homebtn:hover {
+    background-color: #3F4753;
+    height:4%;
+    padding:.5%;
+}

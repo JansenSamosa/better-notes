@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
+import HomeBtn from '../nav/homeBtn'
+
 import { loginUser } from '../../actions/authActions.js'
 import { returnError } from '../../actions/errorActions.js'
 
@@ -44,6 +46,7 @@ export class Login extends Component {
     render() {
         return (
             <div className='auth-base'>
+                <HomeBtn />
                 <h1>Login</h1>
 
                 {this.successMsg()}

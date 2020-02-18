@@ -2,7 +2,7 @@
     width: 350px;
     height: 500px;
     padding: 15px;
-    background-color: #333333;
+    background-color: #39414E;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -13,7 +13,7 @@
     color: #eeeeee;
     padding: 5px;
     font-weight: normal;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Segoe Script;
     border-bottom: 2px solid #eeeeee;
 }
 
@@ -35,15 +35,23 @@
 }
 
 .auth-register-form input[type='submit'], .auth-login-form input[type='submit']{
-    width: 75px;
-    height: 50px;
-    border-radius: 62px;
+    width: 65px;
+    height: 40px;
     border: none;
     margin-left: 50%;
     position: relative;
-    left:-37.5px;
+    left:-32.5px;
     cursor: pointer;
-    margin-bottom: 0;
+    background-color: #eeeeee;
+    transition: all 100ms;
+}
+.auth-register-form input[type='submit']:hover , .auth-login-form input[type='submit']:hover{
+    width: 75px;
+    height: 50px;
+    margin-left: 50%;
+    position: relative;
+    left:-37.5px;
+    background-color: #eeeeee;
 }
 
 .auth-error {

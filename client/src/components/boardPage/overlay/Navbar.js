@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 import Menu from './menu/Menu'
 
-import menuicon from '../../icons/menuicon.png'
+import menuicon from '../../../icons/menuicon.png'
 import './navbar.css'
 
 export class Navbar extends Component {
@@ -16,9 +16,8 @@ export class Navbar extends Component {
         else this.setState({menuOpen: false})
     }
     getBoardName = () => {
-        console.log(this.props.match)
-        if(this.props.board.name === null) return 'Better Notes'
-        else return this.props.board.name
+        if(this.props.boards.board.name === null) return 'Better Notes'
+        else return this.props.boards.board.name
     }
     render() {
         return (
@@ -40,6 +39,6 @@ export class Navbar extends Component {
 }
 
 const mapStateToProps = state => ({
-    board: state.boards.board
+    boards: state.boards
 })
 export default connect(mapStateToProps, {})(Navbar)

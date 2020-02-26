@@ -10,7 +10,7 @@
         animation-iteration-count: 1;
     }
     @keyframes open {
-        from {left:-400px}
+        from {left:-450px}
         to {left: 0}
     }
 
@@ -23,11 +23,11 @@
         animation-name: close;
         animation-duration: 250ms;
         animation-iteration-count: 1;
-        left: -400px;
+        left: -450px;
     }
     @keyframes close {
         from {left: 0}
-        to {left:-400px}
+        to {left:-450px}
     }
 
     .nav-menu-boards {

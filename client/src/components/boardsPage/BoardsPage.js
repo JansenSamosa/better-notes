@@ -31,7 +31,7 @@ export class BoardsPage extends Component {
     }
     renderBoards = () => {
         return (
-            <div>
+            <div className='boards-container'>
                 <HomeBtn />
                 {this.props.boards.map(board => (
                     <div 

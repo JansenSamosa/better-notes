@@ -45,30 +45,33 @@ export class Login extends Component {
     }
     render() {
         return (
-            <div className='auth-base'>
-                <HomeBtn />
-                <h1>Login</h1>
-
-                <form className='auth-login-form'>
-                    <input 
-                        type='text' 
-                        placeholder='Email'
-                        onChange={e => this.setState({...this.state, email: e.target.value})}
-                    />
-                    <input 
-                        type='password' 
-                        placeholder='Password'
-                        onChange={e => this.setState({...this.state, password: e.target.value})}
-                    />    
-                    <input 
-                        type='submit' 
-                        value='Login'
-                        onClick={this.login}
-                    />
-                </form>
-                <p id='to-register'>Dont have an account? Register <Link to='/register'>here</Link></p>
+            <div>
                 {this.successMsg()}
                 {this.errorMsg()}
+                <div className='auth-base'>
+                    <HomeBtn />
+                    <h1>Login</h1>
+                    
+                    <form className='auth-login-form'>
+                        <input 
+                            type='text' 
+                            placeholder='Email'
+                            onChange={e => this.setState({...this.state, email: e.target.value})}
+                        />
+                        <input 
+                            type='password' 
+                            placeholder='Password'
+                            onChange={e => this.setState({...this.state, password: e.target.value})}
+                        />    
+                        <input 
+                            type='submit' 
+                            value='Login'
+                            onClick={this.login}
+                        />
+                    </form>
+                    <p id='to-register'>Dont have an account? Register <Link to='/register'>here</Link></p>
+                    
+                </div>
             </div>
         )
     }

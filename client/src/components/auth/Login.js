@@ -49,9 +49,6 @@ export class Login extends Component {
                 <HomeBtn />
                 <h1>Login</h1>
 
-                {this.successMsg()}
-                {this.errorMsg()}
-                
                 <form className='auth-login-form'>
                     <input 
                         type='text' 
@@ -68,8 +65,10 @@ export class Login extends Component {
                         value='Login'
                         onClick={this.login}
                     />
-                    </form>
-                    <p id='to-register'>Dont have an account? Register <Link to='/register'>here</Link></p>
+                </form>
+                <p id='to-register'>Dont have an account? Register <Link to='/register'>here</Link></p>
+                {this.successMsg()}
+                {this.errorMsg()}
             </div>
         )
     }

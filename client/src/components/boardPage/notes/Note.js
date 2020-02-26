@@ -57,10 +57,11 @@ export class Note extends Component {
     handleKeyCommand = (command, editorState) => {
         console.log(command)
         let newState = RichUtils.handleKeyCommand(editorState, command)
+        const selection = editorState.getSelection()
+        const contentState = editorState.getCurrentContent()
 
         if(command === 'indent') {
-            const selection = editorState.getSelection()
-            const newContentState = Modifier.replaceText(editorState.getCurrentContent(), selection, '    ')
+            const newContentState = Modifier.replaceText(contentState, selection, '    ')
             newState = EditorState.push(editorState, newContentState, 'change-block-data')
         }
         if(command === 'start-unordered-list') {

@@ -11,7 +11,7 @@ export class Navbar extends Component {
         menuOpen: false
     }
 
-    openMenu = () => {
+    toggleMenu = () => {
         if(!this.state.menuOpen) this.setState({menuOpen: true})
         else this.setState({menuOpen: false})
     }
@@ -24,12 +24,12 @@ export class Navbar extends Component {
             <div>
                 <div className='nav-bar'>
                     <h1 className='nav-bar-title'>{this.getBoardName()}</h1>
-                    <Menu open={this.state.menuOpen}/>
+                    <Menu open={this.state.menuOpen} toggleMenu={this.toggleMenu}/>
                     <img 
                         className='nav-bar-menubutton' 
                         src={menuicon} 
                         alt=''
-                        onClick={this.openMenu}
+                        onClick={this.toggleMenu}
                     />
                 </div>
                 

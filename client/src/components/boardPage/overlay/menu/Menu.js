@@ -36,7 +36,7 @@ export class Menu extends Component {
         return (
             <div style={{position:'absolute', top:'0', left:'0'}} >
                 <div className={this.getClassName()}>
-                    <MenuBoards />
+                    <MenuBoards toggleMenu={this.props.toggleMenu}/>
                     <button 
                         className='nav-menu-homebutton' 
                         onClick={this.toHome}

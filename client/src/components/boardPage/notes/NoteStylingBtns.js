@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { RichUtils } from 'draft-js'
+import { EditorState, Modifier ,RichUtils } from 'draft-js'
 
 import boldIcon from '../../../icons/richstylingicons/boldicon.png'
 import italicIcon from '../../../icons/richstylingicons/italicicon.png'
@@ -52,6 +52,7 @@ export class NoteStylingBtns extends Component {
         if(e.target.className === 'rsbtn-on') newClassName = 'rsbtn-off'
         
         const editorState = this.props.getEditorState()
+        const selection = editorState.getSelection()
         let newState = editorState
 
         switch(e.target.name) {

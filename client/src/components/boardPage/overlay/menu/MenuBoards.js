@@ -27,6 +27,7 @@ export class MenuBoards extends Component {
     redirects = () => {
         if(this.state.redirect) {
             this.setState({redirect: false, redirectTo: null})
+            this.props.toggleMenu()
             return <Redirect to={this.state.redirectTo}/>
         }
     }

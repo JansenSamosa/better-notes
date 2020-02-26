@@ -1,16 +1,16 @@
-@media (pointer: fine) {
+@media (pointer: none), (pointer: coarse) {
     .nav-menu-open {
         position: fixed;
         background-color: #39414E;
         height: 100%;
-        width: 250px;
+        width: 100%;
         box-shadow:1px 5px 3px black;
         animation-name: open;
         animation-duration: 250ms;
         animation-iteration-count: 1;
     }
     @keyframes open {
-        from {left:-250px}
+        from {left:-400px}
         to {left: 0}
     }
 
@@ -18,16 +18,16 @@
         position: fixed;
         background-color: #39414E;
         height: 100%;
-        width: 250px;
+        width: 100%;
         box-shadow:1px 5px 3px black;
         animation-name: close;
         animation-duration: 250ms;
         animation-iteration-count: 1;
-        left: -260px;
+        left: -400px;
     }
     @keyframes close {
         from {left: 0}
-        to {left:-250px}
+        to {left:-400px}
     }
 
     .nav-menu-boards {

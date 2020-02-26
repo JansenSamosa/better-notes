@@ -4,6 +4,7 @@ import InfoPanel from './InfoPanel'
 import HomeNavBtns from './HomeNavBtns'
 
 import './homePage.css'
+import './homePageMobile.css'
 
 export class HomePage extends Component {
     render() {

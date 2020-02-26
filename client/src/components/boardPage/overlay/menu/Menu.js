@@ -8,6 +8,7 @@ import { getAllBoards } from '../../../../actions/boardActions'
 
 import homeIcon from '../../../../icons/homeicon.png'
 import './menu.css'
+import './menuMobile.css'
 
 export class Menu extends Component {
     state = {

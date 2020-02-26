@@ -1,38 +1,31 @@
-@media (pointer: fine) {
+@media (pointer: none), (pointer: coarse) {
     .home-container {
         position: absolute;
-        left:50%;
-        top:50%;
+        left:0;
+        top:0;
     }
     .home-info {
         background-color: #39414E;
-        position: relative;
-        right:400px;
-        bottom:200px;   
-        width:680px;
-        height: 400px;
         box-shadow: -3px 3px 5px darkgray;
         border: none;
         color: #EEEEEE;
         padding:20px;
+        font-size: 1em;
     }
 
     .home-info h1 {
         border-bottom: 1px solid #EEEEEE;
         font-family: Segoe Script;
         font-weight: normal;
+        font-size:1.3em;
     }
 
     .home-info p {
         margin-top: 10px;
-        font-size: 20px;
     }
 
     .home-btns {
-        position: relative;
-        bottom:640px;
-        left: 330px;
-        width:200px;
+        
     }
 
     .home-btns button {
@@ -40,16 +33,10 @@
         background-color: #4C5563;
         border: none;
         padding:17px;
-        margin-bottom:10px;
-        cursor: pointer;
+        margin-bottom:0;
         box-shadow: -2px 2px 3px darkgray;
         color: #EEEEEE;
         font-size: 20px;
-        transition: width 200ms;
-    }
-
-    .home-btns button:hover {
-        background-color: #3F4753;
-        width:110%
+        height: 5em;
     }
 }

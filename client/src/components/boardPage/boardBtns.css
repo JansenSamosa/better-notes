@@ -4,7 +4,7 @@
     right:10px;
     bottom:10px;
     padding:10px;
-    width:2%;
+    width:40px;
     cursor: pointer;
     box-shadow: 3px 3px 5px darkgray;
     transition: width 100ms, box-shadow 100ms;
@@ -12,7 +12,7 @@
 .board-btns-add:hover {
     background-color: #12283f;
     box-shadow: 5px 5px 5px darkgray;
-    width:2.5%;
+    width:48px;
 }
 
 .board-btns-save {
@@ -21,7 +21,7 @@
     left:10px;
     bottom:10px;
     padding:10px;
-    width:2%;
+    width:40px;
     cursor: pointer;
     box-shadow: -3px 3px 5px darkgray;
     transition: width 100ms, box-shadow 100ms;
@@ -29,5 +29,5 @@
 .board-btns-save:hover {
     background-color: #12283f;
     box-shadow: -5px 5px 5px darkgray;
-    width:2.5%;
+    width:48px;
 }

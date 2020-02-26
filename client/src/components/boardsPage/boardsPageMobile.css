@@ -1,12 +1,13 @@
-@media (pointer: fine) {
+@media (pointer: none), (pointer: coarse) {
+    *{
+        overflow: hidden;
+    }
     .boards {
         background-color: #39414E;
-        width: 25em;
-        height: 40em;
+        width: 100%;
+        height: 100%;
         position: absolute;
-        left:40%;
-        top:20%;
-        padding:10px;
+        padding-top:10px;
         text-align: center;
         color: #EEEEEE;
         box-shadow: -4px 4px 7px darkgray;

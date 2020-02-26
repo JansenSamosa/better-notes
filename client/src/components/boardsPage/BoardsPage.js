@@ -9,6 +9,7 @@ import HomeBtn from '../nav/homeBtn'
 import newBoardIcon from '../../icons/newboardicon.png'
 import delBoardIcon from '../../icons/deleteboardicon.png'
 import './boardsPage.css'
+import './boardsPageMobile.css'
 
 export class BoardsPage extends Component {
     state = {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { EditorState, Modifier, RichUtils } from 'draft-js'
+import { RichUtils } from 'draft-js'
 
 import boldIcon from '../../../icons/richstylingicons/boldicon.png'
 import italicIcon from '../../../icons/richstylingicons/italicicon.png'

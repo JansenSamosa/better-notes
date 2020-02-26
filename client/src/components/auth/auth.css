@@ -63,7 +63,7 @@
     border: 2px solid #ff4d4d;
     text-align: center;
     border-radius: 10px;
-    opacity: 80%;
+    
     z-index: 5;
 }
 
@@ -82,7 +82,7 @@
     border: 2px solid #1aff1a;
     text-align: center;
     border-radius: 10px;
-    opacity: 80%;
+    
     z-index: 5;
 }
 .auth-success p {

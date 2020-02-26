@@ -22,29 +22,28 @@ export class NoteStylingBtns extends Component {
 
     componentDidUpdate() {
         const selection = this.props.getEditorState().getSelection()
-        console.log(selection)
-        if(selection.anchorOffset - selection.focusOffset !== 0) {
-            const focusKey = selection.getFocusKey()
-            const inlineStyle = this.props.getEditorState().getCurrentInlineStyle(focusKey)
+      
+        const focusKey = selection.getFocusKey()
+        const inlineStyle = this.props.getEditorState().getCurrentInlineStyle(focusKey)
 
-            if(inlineStyle.has("BOLD")){ if(this.state.boldClass !== 'rsbtn-on') {this.setState({...this.state, boldClass: 'rsbtn-on'})}}
-            else {if(this.state.boldClass !== 'rsbtn-off') {this.setState({...this.state, boldClass: 'rsbtn-off'})}}
+        if(inlineStyle.has("BOLD")){ if(this.state.boldClass !== 'rsbtn-on') {this.setState({...this.state, boldClass: 'rsbtn-on'})}}
+        else {if(this.state.boldClass !== 'rsbtn-off') {this.setState({...this.state, boldClass: 'rsbtn-off'})}}
 
-            if(inlineStyle.has("ITALIC")){ if(this.state.italicClass !== 'rsbtn-on') {this.setState({...this.state, italicClass: 'rsbtn-on'})}}
-            else {if(this.state.italicClass !== 'rsbtn-off') {this.setState({...this.state, italicClass: 'rsbtn-off'})}}
+        if(inlineStyle.has("ITALIC")){ if(this.state.italicClass !== 'rsbtn-on') {this.setState({...this.state, italicClass: 'rsbtn-on'})}}
+        else {if(this.state.italicClass !== 'rsbtn-off') {this.setState({...this.state, italicClass: 'rsbtn-off'})}}
 
-            if(inlineStyle.has("UNDERLINE")){ if(this.state.underlineClass !== 'rsbtn-on') {this.setState({...this.state, underlineClass: 'rsbtn-on'})}}
-            else {if(this.state.underlineClass !== 'rsbtn-off') {this.setState({...this.state, underlineClass: 'rsbtn-off'})}}
+        if(inlineStyle.has("UNDERLINE")){ if(this.state.underlineClass !== 'rsbtn-on') {this.setState({...this.state, underlineClass: 'rsbtn-on'})}}
+        else {if(this.state.underlineClass !== 'rsbtn-off') {this.setState({...this.state, underlineClass: 'rsbtn-off'})}}
 
-            if(inlineStyle.has("HEADER")){ if(this.state.headerClass !== 'rsbtn-on') {this.setState({...this.state, headerClass: 'rsbtn-on'})}}
-            else {if(this.state.headerClass !== 'rsbtn-off') {this.setState({...this.state, headerClass: 'rsbtn-off'})}}
+        if(inlineStyle.has("HEADER")){ if(this.state.headerClass !== 'rsbtn-on') {this.setState({...this.state, headerClass: 'rsbtn-on'})}}
+        else {if(this.state.headerClass !== 'rsbtn-off') {this.setState({...this.state, headerClass: 'rsbtn-off'})}}
 
-            if(inlineStyle.has("HIGHLIGHT")){ if(this.state.highlightClass !== 'rsbtn-on') {this.setState({...this.state, highlightClass: 'rsbtn-on'})}}
-            else {if(this.state.highlightClass !== 'rsbtn-off') {this.setState({...this.state, highlightClass: 'rsbtn-off'})}}
+        if(inlineStyle.has("HIGHLIGHT")){ if(this.state.highlightClass !== 'rsbtn-on') {this.setState({...this.state, highlightClass: 'rsbtn-on'})}}
+        else {if(this.state.highlightClass !== 'rsbtn-off') {this.setState({...this.state, highlightClass: 'rsbtn-off'})}}
 
-            if(inlineStyle.has("STRIKETHROUGH")){ if(this.state.strikethroughClass !== 'rsbtn-on') {this.setState({...this.state, strikethroughClass: 'rsbtn-on'})}}
-            else {if(this.state.strikethroughClass !== 'rsbtn-off') {this.setState({...this.state, strikethroughClass: 'rsbtn-off'})}}
-        }
+        if(inlineStyle.has("STRIKETHROUGH")){ if(this.state.strikethroughClass !== 'rsbtn-on') {this.setState({...this.state, strikethroughClass: 'rsbtn-on'})}}
+        else {if(this.state.strikethroughClass !== 'rsbtn-off') {this.setState({...this.state, strikethroughClass: 'rsbtn-off'})}}
+        
     }
     onClick = e => {
         e.preventDefault()

@@ -8,7 +8,7 @@ import './homePage.css'
 export class HomePage extends Component {
     render() {
         return (
-            <div>
+            <div className='home-container'>
                 <InfoPanel />
                 <HomeNavBtns />
             </div>

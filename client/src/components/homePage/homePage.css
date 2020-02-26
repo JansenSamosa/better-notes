@@ -1,14 +1,19 @@
+.home-container {
+    position: absolute;
+    left:50%;
+    top:50%;
+}
 .home-info {
     background-color: #39414E;
-    position: absolute;
-    left: 25%;
-    top:28%;    
-    width:35%;
-    height: 45%;
+    position: relative;
+    right:400px;
+    bottom:200px;   
+    width:680px;
+    height: 400px;
     box-shadow: -3px 3px 5px darkgray;
     border: none;
     color: #EEEEEE;
-    padding:1%;
+    padding:20px;
 }
 
 .home-info h1 {
@@ -23,9 +28,9 @@
 }
 
 .home-btns {
-    position: absolute;
-    left: 63%;
-    top: 28%;
+    position: relative;
+    bottom:640px;
+    left: 330px;
     width:200px;
 }
 

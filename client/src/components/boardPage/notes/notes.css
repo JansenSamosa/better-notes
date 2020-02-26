@@ -20,7 +20,49 @@
     position: relative;
 }
 
-.notes-note img {
+.notes-note-rsbtns .rsbtn-off {
+    width: 13px;
+    height: 13px;
+    padding:5px;
+    border: 1px solid lightgrey;
+    position: relative;
+    margin-right:3px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px grey;
+}
+.notes-note-rsbtns .rsbtn-on {
+    width: 13px;
+    height: 13px;
+    padding:5px;
+    border: 1px solid grey;
+    position: relative;
+    margin-right:3px;
+    cursor: pointer;
+    background-color: #eeeeee;
+}
+
+.notes-note-rsbtns .rsbtn-off:hover  {
+    box-shadow: 2px 2px 1px grey;
+}
+
+.notes-note-movebtns img {
+    position: absolute;
+    width:20px;
+    right: 5px;
+    cursor: pointer;
+    transition: width 100ms;
+}
+.notes-note-movebtns img[name='up'] {
+    bottom: 70px;
+}
+.notes-note-movebtns img[name='down'] {
+    transform: rotate(180deg);
+    bottom: 40px;
+}
+.notes-note-movebtns img:hover {
+    width:23px;
+}
+.notes-note-delete {
     width:20px;
     position: absolute;
     right:5px;
@@ -28,7 +70,7 @@
     cursor: pointer;
     transition: width 100ms;
 }
-.notes-note img:hover {
+.notes-note-delete:hover {
     width:25px;
 }
 
@@ -37,9 +79,4 @@
     margin-left:20px;
     margin-top:5px;
     margin-bottom:5px;
-}
-
-.notes-note-header {
-    font-weight: bold;
-    font-size: 120%;
 }

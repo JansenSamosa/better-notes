@@ -1,5 +1,5 @@
 import { GET_ALL_BOARDS, GET_BOARD, BOARD_LOADED, BOARD_LOADING, DELETE_BOARD } from '../actions/types'
-import { ADD_NOTE, DEL_NOTE, SAVE_NOTE } from '../actions/types'
+import { ADD_NOTE, DEL_NOTE, SAVE_NOTE, MOVE_NOTE } from '../actions/types'
 
 import uuid from 'uuid'
 
@@ -15,7 +15,7 @@ const initialState = {
 }
 
 const boardReducer = (state = initialState, action) => {
-    let newNotes = null
+    let newNotes = state.board.notes
     let newState = state
     switch(action.type) {
         //BOARD TYPES
@@ -52,6 +52,11 @@ const boardReducer = (state = initialState, action) => {
             return newState
         case DEL_NOTE:
             newNotes = state.board.notes.filter(note => (note.id !== action.payload.id))
+            newState = {...state, board: {...state.board, notes: newNotes}}
+            return newState
+        case MOVE_NOTE:
+            const f = newNotes.splice(action.payload.from, 1)[0]
+            newNotes.splice(action.payload.to, 0, f)
             newState = {...state, board: {...state.board, notes: newNotes}}
             return newState
         default:

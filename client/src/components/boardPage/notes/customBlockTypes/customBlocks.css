@@ -1,0 +1,10 @@
+.checkbox-list {
+    display: flex;
+    
+}
+
+.checkbox-list input {
+    position: relative;
+    left: 8px;
+    top: 2px;
+}

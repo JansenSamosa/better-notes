@@ -66,7 +66,7 @@ export const saveBoard = () => (dispatch, getState) => {
     const newBoard = {
         name: getState().boards.board.name,
         notes: getState().boards.board.notes
-    }
+    }   
     axios.put(`/api/boards/myboards/${getState().boards.board.boardID}/update`, newBoard, tokenConfig(getState))
         .then(res => {
             dispatch({type: BOARD_LOADED})

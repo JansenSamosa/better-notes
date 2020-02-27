@@ -1,17 +1,31 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Editor, EditorState, convertFromRaw, 
+import { EditorState, convertFromRaw, 
     RichUtils, getDefaultKeyBinding, KeyBindingUtil, 
     Modifier, DefaultDraftBlockRenderMap } from 'draft-js'
 
+import Editor from 'draft-js-plugins-editor'
+import createLinkifyPlugin from 'draft-js-linkify-plugin'
+import createImagePlugin from 'draft-js-image-plugin'
+
 import Immutable from 'immutable'
-import { saveNote, deleteNote } from '../../../actions/notesActions'
+import { saveNote } from '../../../actions/notesActions'
 
+import NoteBtns from './NoteBtns'
 import NoteStylingBtns from './NoteStylingBtns'
-import NoteMoveBtns from './NoteMoveBtns'
 
-import deleteNoteIcon from '../../../icons/deletenoteicon.png'
 import './notes.css'
+
+const imagePlugin = createImagePlugin()
+const linkifyPlugin = createLinkifyPlugin({
+    component: (props) => (
+        <a {...props} onClick={() => window.open(props.href)}/>
+    )
+})
+
+const plugins = [
+    linkifyPlugin, imagePlugin
+]
 
 export class Note extends Component {
     constructor(props) {
@@ -21,16 +35,25 @@ export class Note extends Component {
         if(this.props.note.content.contentState === null) {
             editorState = EditorState.createEmpty()
         } else {
-            const newContentState = {...this.props.note.content.contentState, entityMap: {}}
+            console.log(this.props.note.content.contentState)
+            let newContentState = this.props.note.content.contentState
+            if(this.props.note.content.contentState.entityMap === undefined) {
+                newContentState = {...this.props.note.content.contentState,entityMap: {}}
+            }
+                
+            console.log(newContentState)
             editorState = EditorState.createWithContent(convertFromRaw(newContentState))
         }
 
         this.state = {
             editorState,
         }
+        
     }
-    deleteNote = () => {
-        this.props.deleteNote(this.props.note.id)
+    componentDidMount() {
+        setTimeout(() => {
+            this.focus()
+        }, 200)
     }
     onChange = editorState => {
         this.setState({...this.state, editorState})
@@ -97,13 +120,17 @@ export class Note extends Component {
             this.onChange(newState)
         }
     }
+    focus = () => {
+        this.editor.focus()
+    }
     getEditorState = () => this.state.editorState
+
     render() {
         return (
-            <div className='notes-note'>
-                <NoteMoveBtns note={this.props.note}/>
-                <NoteStylingBtns onChange={this.onChange} getEditorState={this.getEditorState}/>
+            <div className='notes-note' >  
+                <NoteStylingBtns onChange={this.onChange} getEditorState={this.getEditorState}/>           
                 <Editor 
+                    ref={element => {this.editor = element}}
                     editorState={this.state.editorState} 
                     onChange={this.onChange} 
                     handleKeyCommand={this.handleKeyCommand.bind(this)}
@@ -111,12 +138,17 @@ export class Note extends Component {
                     blockStyleFn={this.blockStyleFn}
                     blockRenderMap={extendedBlockRenderMap}
                     customStyleMap={styleMap}
+                    plugins={plugins}
                 />
-                <img className='notes-note-delete' src={deleteNoteIcon} alt='' onClick={this.deleteNote}/>
+                <NoteBtns 
+                    note={this.props.note}
+                    onChange={this.onChange} 
+                    getEditorState={this.getEditorState}
+                />
             </div>
         )
     }
-}
+}//<img className='notes-note-delete' src={deleteNoteIcon} alt='' onClick={this.deleteNote}/>
 const blockRenderMap = Immutable.Map({
     'checkbox-list-item': {
         element: 'li',
@@ -138,4 +170,4 @@ const styleMap = {
     }
 }
 
-export default connect(null, { saveNote, deleteNote })(Note)
+export default connect(null, { saveNote })(Note)

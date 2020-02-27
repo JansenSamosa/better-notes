@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { moveNote } from '../../../actions/notesActions'
+import { moveNote } from '../../../../actions/notesActions'
 
-import noteMoveIcon from '../../../icons/notemoveicon.png'
+import noteMoveIcon from '../../../../icons/notemoveicon.png'
 
 export class NoteMoveBtns extends Component {
 

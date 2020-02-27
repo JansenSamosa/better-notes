@@ -1,5 +1,5 @@
 import { GET_ALL_BOARDS, GET_BOARD, BOARD_LOADED, BOARD_LOADING, DELETE_BOARD } from '../actions/types'
-import { ADD_NOTE, DEL_NOTE, SAVE_NOTE, MOVE_NOTE } from '../actions/types'
+import { ADD_NOTE, DEL_NOTE, SAVE_NOTE, MOVE_NOTE, LOCK_NOTE } from '../actions/types'
 
 import uuid from 'uuid'
 
@@ -22,6 +22,7 @@ const boardReducer = (state = initialState, action) => {
         case GET_ALL_BOARDS:
             return {...state, boards: action.payload.boards}
         case GET_BOARD:
+            console.log(action.payload)
             return {...state, board: action.payload}
         case DELETE_BOARD:
             return {...state, board: {name: null, ownerID: null, boardID: null, notes: null}}
@@ -35,6 +36,7 @@ const boardReducer = (state = initialState, action) => {
             newNotes = state.board.notes
             newNotes.push({
                 id: uuid.v4(),
+                locked: false,
                 content: {
                     contentState: null
                 }
@@ -57,6 +59,15 @@ const boardReducer = (state = initialState, action) => {
         case MOVE_NOTE:
             const f = newNotes.splice(action.payload.from, 1)[0]
             newNotes.splice(action.payload.to, 0, f)
+            newState = {...state, board: {...state.board, notes: newNotes}}
+            return newState
+        case LOCK_NOTE:
+            newNotes = state.board.notes.map(note => {
+                if(note.id === action.payload.id) {
+                    note.locked = action.payload.locked
+                }
+                return note
+            })
             newState = {...state, board: {...state.board, notes: newNotes}}
             return newState
         default:

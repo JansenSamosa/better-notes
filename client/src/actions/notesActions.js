@@ -1,4 +1,4 @@
-import { ADD_NOTE, DEL_NOTE, SAVE_NOTE, MOVE_NOTE } from '../actions/types'
+import { ADD_NOTE, DEL_NOTE, SAVE_NOTE, MOVE_NOTE, LOCK_NOTE } from '../actions/types'
 
 import { convertToRaw } from 'draft-js'
 
@@ -45,6 +45,16 @@ export const moveNote = (noteid, direction) => (dispatch, getState) => {
         payload: {
             from: index,
             to
+        }
+    })
+}
+
+export const lockNote = (noteid, locked) => dispatch => {
+    dispatch({
+        type: LOCK_NOTE,
+        payload: {
+            id: noteid,
+            locked
         }
     })
 }

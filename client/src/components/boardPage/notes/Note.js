@@ -8,6 +8,8 @@ import Editor from 'draft-js-plugins-editor'
 import createLinkifyPlugin from 'draft-js-linkify-plugin'
 import createImagePlugin from 'draft-js-image-plugin'
 
+import CheckboxList from './customBlockTypes/CheckboxList'
+
 import Immutable from 'immutable'
 import { saveNote } from '../../../actions/notesActions'
 
@@ -55,6 +57,9 @@ export class Note extends Component {
             this.focus()
         }, 200)
     }
+
+    getEditorState = () => (this.state.editorState)
+
     onChange = editorState => {
         this.setState({...this.state, editorState})
         this.props.saveNote(this.props.note.id, this.state.editorState.getCurrentContent())
@@ -64,6 +69,19 @@ export class Note extends Component {
         const type = contentBlock.getType()
         if(type === 'unordered-list-item' || type === 'ordered-list-item' || type === 'checkbox-list-item') {
             return 'notes-note-li'
+        }
+    }
+    myBlockRenderer = contentBlock => {
+        const type = contentBlock.getType()
+        if(type === 'checkbox-list-item') {
+            return {
+                component: CheckboxList,
+                editable: true,
+                props: {
+                    getEditorState: this.getEditorState,
+                    onChange: this.onChange
+                }
+            }
         }
     }
     keyBindingFn = e => {
@@ -123,8 +141,7 @@ export class Note extends Component {
     focus = () => {
         this.editor.focus()
     }
-    getEditorState = () => this.state.editorState
-
+    
     render() {
         return (
             <div className='notes-note' >  
@@ -138,6 +155,7 @@ export class Note extends Component {
                     blockStyleFn={this.blockStyleFn}
                     blockRenderMap={extendedBlockRenderMap}
                     customStyleMap={styleMap}
+                    blockRendererFn={this.myBlockRenderer}
                     plugins={plugins}
                 />
                 <NoteBtns 

@@ -1,45 +1,48 @@
 import React, { Component } from 'react'
-import { EditorBlock, EditorState } from 'draft-js';
+import { EditorBlock, EditorState, Modifier, SelectionState } from 'draft-js';
 
+import checkImg from '../../../../icons/checkicon.png'
 import './customBlocks.css'
 
-const updateDataOfBlock = (editorState, block, newData) => {
-    const contentState = editorState.getCurrentContent();
-    const newBlock = block.merge({
-      data: newData,
-    });
-    const newContentState = contentState.merge({
-      blockMap: contentState.getBlockMap().set(block.getKey(), newBlock),
-    });
-    return EditorState.push(editorState, newContentState, 'change-block-type');
-  };
-
 export class CheckboxList extends Component {
-    componentDidMount() {
+    constructor(props) {
+        super(props)
+
+        let checked = null
+
+        if(checked === null) {
+            const editorState = props.blockProps.getEditorState()
+            const contentState = editorState.getCurrentContent()
+            const contentStateWithEntity = contentState.createEntity('BOOLEAN', 'MUTABLE', {
+                checked: false
+            })
+            console.log(contentState)
+            console.log(contentStateWithEntity)
+        }
         
-    }
-    updateData = e => {
-    
-        const { block, blockProps } = this.props;
 
-        // This is the reason we needed a higher-order function for blockRendererFn
-        const { onChange, getEditorState } = blockProps;
-        const data = block.getData();
-        const checked = (data.has('checked') && data.get('checked') === true);
-        console.log(!checked)
-        const newData = data.set('checked', !checked);
-        onChange(updateDataOfBlock(getEditorState(), block, newData));
+        this.state = {
+            checked: false
+        }
     }
 
+    check = (e) => {
+        e.preventDefault()
+        this.setState({checked: !this.state.checked})
+        console.log(this.props)
+    }
+    checkbox = () => {
+        if(this.state.checked) {
+            return <button onClick={this.check.bind(this)}> <img src={checkImg} alt=''/> </button>
+        } else {
+            return <button onClick={this.check.bind(this)} /> 
+        }
+    }
     render() {
-        const data = this.props.block.getData();
-        const checked = data.get('checked') === true;
         return (
             <div className='checkbox-list'>
-                <input type='checkbox' checked={checked}onChange={this.updateData.bind(this)}/>
+                {this.checkbox()}
                 <EditorBlock {...this.props}></EditorBlock>
-                
-                
             </div>
         )
     }

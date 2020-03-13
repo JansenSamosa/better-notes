@@ -1,0 +1,21 @@
+.block-check-list-item {
+    position: relative;
+}
+.block-check-list-item img{
+    position: absolute;
+    top:5px;
+    left:5px;
+    width:.95rem;
+    height:.95rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: .2rem;
+}
+.checked{
+    background-color: rgb(216, 216, 216);
+}
+.unchecked{
+    background-color: rgb(233, 233, 233);
+}
+

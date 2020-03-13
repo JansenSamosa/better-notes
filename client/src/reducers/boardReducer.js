@@ -38,7 +38,7 @@ const boardReducer = (state = initialState, action) => {
                 id: uuid.v4(),
                 locked: false,
                 content: {
-                    contentState: null
+                    slateValue: null
                 }
             })
             newState = {...state, board: {...state.board, notes: newNotes}}

@@ -6,13 +6,13 @@ export const addNote = () => dispatch => {
     dispatch({type: ADD_NOTE})
 }
 
-export const saveNote = (noteid, newContent) => dispatch => {
+export const saveNote = (noteid, newValue) => dispatch => {
     dispatch({
         type: SAVE_NOTE,
         payload: {
             id: noteid,
             content: {
-                contentState: convertToRaw(newContent)
+                slateValue: newValue
             }
         }
     })

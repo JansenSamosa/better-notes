@@ -20,7 +20,7 @@
     position: relative;
 }
 
-.notes-note-rsbtns .rsbtn-off {
+.notes-note-rsbtns img {
     width: 13px;
     height: 13px;
     padding:5px;
@@ -30,18 +30,8 @@
     cursor: pointer;
     box-shadow: 1px 1px 1px grey;
 }
-.notes-note-rsbtns .rsbtn-on {
-    width: 13px;
-    height: 13px;
-    padding:5px;
-    border: 1px solid grey;
-    position: relative;
-    margin-right:3px;
-    cursor: pointer;
-    background-color: #eeeeee;
-}
 
-.notes-note-rsbtns .rsbtn-off:hover  {
+.notes-note-rsbtns img:hover  {
     box-shadow: 2px 2px 1px grey;
 }
 
@@ -86,9 +76,37 @@
     width:25px
 }
 
-.notes-note-li {
+li {
     font-size: 90%;
-    margin-left:20px;
-    margin-top:5px;
-    margin-bottom:5px;
+    margin-left:25px;
+}
+
+blockquote {
+    margin-left: 10px;
+    color:grey;
+    font-style: italic;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.header {
+    font-size: 140%;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.highlight {
+    background-color: yellow;
+}
+
+.strikethrough {
+    text-decoration: line-through;
 }

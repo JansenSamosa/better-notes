@@ -8,6 +8,7 @@
         animation-name: open;
         animation-duration: 250ms;
         animation-iteration-count: 1;
+        z-index: 7;
     }
     @keyframes open {
         from {left:-450px}
@@ -15,10 +16,11 @@
     }
 
     .nav-menu-closed {
+        opacity: 0;
         position: fixed;
         background-color: #39414E;
-        height: 100%;
-        width: 100%;
+        height: 0%;
+        width: 0%;
         box-shadow:1px 5px 3px black;
         animation-name: close;
         animation-duration: 250ms;

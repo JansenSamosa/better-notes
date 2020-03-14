@@ -6,9 +6,7 @@ import { deleteNote } from '../../../../actions/notesActions'
 import deleteNoteIcon from '../../../../icons/deletenoteicon.png'
 
 export class NoteDeleteBtn extends Component {
-    componentDidMount() {
-        console.log("HI")
-    }
+
     deleteNote = () => {
         this.props.deleteNote(this.props.note.id)
     }

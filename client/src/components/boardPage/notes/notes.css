@@ -14,7 +14,7 @@
     align-self: flex-start;
     margin:10px;
     padding:10px;
-    min-width: 100px;
+    min-width: 300px;
     min-height: 100px;
     box-shadow: -3px 3px 3px darkgray;
     position: relative;
@@ -29,10 +29,22 @@
     margin-right:3px;
     cursor: pointer;
     box-shadow: 1px 1px 1px grey;
+    animation-name: slideInRSBtns;
+    animation-duration: 500ms;
 }
-
-.notes-note-rsbtns img:hover  {
+@keyframes slideInRSBtns {
+    0% {left: 250px; opacity: 0%;}
+    70% {opacity: 20%;}
+    100% {left: 0px; opacity: 100%;}
+}
+.notes-note-rsbtns img[name='rmvMarks'] {
+    width:9px;
+    height:9px;
+    margin-right: 15px;
+}
+.notes-note-rsbtns img:active  {
     box-shadow: 2px 2px 1px grey;
+    background-color: lightgrey;
 }
 
 .notes-note-movebtns img {
@@ -71,6 +83,7 @@
     width:20px;
     cursor: pointer;
     transition: width 100ms;
+    z-index: 3;
 }
 .notes-note-lockbtn:hover {
     width:25px

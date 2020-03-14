@@ -14,6 +14,7 @@ import './notes.css'
 import NoteStylingBtns from './NoteStylingBtns'
 
 const LIST_TYPES = ['unordered-list', 'ordered-list', 'check-list']
+const MARK_TYPES = ['bold', 'italic', 'underline', 'highlight', 'strikethrough', 'header']
 
 const Note = (props) => {
     const editor = useMemo(() => withLinks(withHistory(withReact(createEditor()))), [])
@@ -30,8 +31,9 @@ const Note = (props) => {
     const renderLeaf = useCallback(props => {
         return <Leaf {...props} />
     }, [])
-
+    console.log(props)
     return (
+        
         <Slate 
             editor={editor} 
             value={value} 
@@ -41,14 +43,17 @@ const Note = (props) => {
             }}
             >
             <div className='notes-note'>
-                <NoteStylingBtns editor={editor} 
+                <NoteBtns 
+                    note={props.note}
+                    editor={editor} 
                     toggleBlock={toggleBlock} 
                     toggleMark={toggleMark}
                     isBlockActive={isBlockActive}
                     isMarkActive={isMarkActive}
-                />
+                    removeAllMarks={removeAllMarks} />
                 <Editable
                     autoFocus
+                    spellCheck={false}
                     renderElement={renderElement}
                     renderLeaf={renderLeaf}
                     onKeyDown={e => {
@@ -56,65 +61,12 @@ const Note = (props) => {
                     }}
                 
                 />
-                <NoteBtns note={props.note} />
+                
             </div>      
         </Slate>
     )
 }
-const withLinks = editor => {
-    const { insertData, insertText, isInline } = editor
-  
-    editor.isInline = element => {
-      return element.type === 'link' ? true : isInline(element)
-    }
-  
-    editor.insertText = text => {
-      if (text && isUrl(text)) {
-        wrapLink(editor, text)
-      } else {
-        insertText(text)
-      }
-    }
-  
-    editor.insertData = data => {
-      const text = data.getData('text/plain')
-  
-      if (text && isUrl(text)) {
-        wrapLink(editor, text)
-      } else {
-        insertData(data)
-      }
-    }
-  
-    return editor
-}
-const isLinkActive = editor => {
-    const [link] = Editor.nodes(editor, { match: n => n.type === 'link' })
-    return !!link
-}
-const unwrapLink = editor => {
-    Transforms.unwrapNodes(editor, { match: n => n.type === 'link' })
-}
-const wrapLink = (editor, url) => {
-    if (isLinkActive(editor)) {
-        unwrapLink(editor)
-      }
-    
-      const { selection } = editor
-      const isCollapsed = selection && Range.isCollapsed(selection)
-      const link = {
-        type: 'link',
-        url,
-        children: isCollapsed ? [{ text: url }] : [],
-      }
-    
-      if (isCollapsed) {
-        Transforms.insertNodes(editor, link)
-      } else {
-        Transforms.wrapNodes(editor, link, { split: true })
-        Transforms.collapse(editor, { edge: 'end' })
-      }
-}
+
 const keyBindings = (e, editor) => {
     const key = e.key  
     if(key === 'Tab'){
@@ -150,6 +102,8 @@ const keyBindings = (e, editor) => {
             case 'j':
                 e.preventDefault()
                 return toggleMark(editor, 'header')
+            case 'm':
+                return removeAllMarks(editor)
             default:
                 return null
         }
@@ -254,9 +208,69 @@ const toggleMark = (editor, mark) => {
     }
 }
 
+const removeAllMarks = editor => {
+    MARK_TYPES.forEach(type => Editor.removeMark(editor, type))
+}
+
 const isMarkActive = (editor, mark) => {
     const marks = Editor.marks(editor) 
     const isActive = marks[mark] ? true: false
     return isActive
+}
+
+//Links
+const withLinks = editor => {
+    const { insertData, insertText, isInline } = editor
+  
+    editor.isInline = element => {
+      return element.type === 'link' ? true : isInline(element)
+    }
+  
+    editor.insertText = text => {
+      if (text && isUrl(text)) {
+        wrapLink(editor, text)
+      } else {
+        insertText(text)
+      }
+    }
+  
+    editor.insertData = data => {
+      const text = data.getData('text/plain')
+  
+      if (text && isUrl(text)) {
+        wrapLink(editor, text)
+      } else {
+        insertData(data)
+      }
+    }
+  
+    return editor
+}
+const isLinkActive = editor => {
+    const [link] = Editor.nodes(editor, { match: n => n.type === 'link' })
+    return !!link
+}
+const unwrapLink = editor => {
+    Transforms.unwrapNodes(editor, { match: n => n.type === 'link' })
+}
+const wrapLink = (editor, url) => {
+    if (isLinkActive(editor)) {
+        unwrapLink(editor)
+      }
+    
+      const { selection } = editor
+      const isCollapsed = selection && Range.isCollapsed(selection)
+      const link = {
+        type: 'link',
+        url,
+        children: isCollapsed ? [{ text: url }] : [],
+      }
+    
+      if (isCollapsed) {
+        Transforms.insertNodes(editor, link)
+      } else {
+        Transforms.wrapNodes(editor, link, { split: true })
+        Transforms.collapse(editor, { edge: 'end' })
+      }
 }
 export default connect(null, { saveNote })(Note)

@@ -12,6 +12,8 @@ import ulIcon from '../../../icons/richstylingicons/ulicon.png'
 import olIcon from '../../../icons/richstylingicons/olicon.png'
 import clIcon from '../../../icons/richstylingicons/clicon.png'
 
+import removeMarksIcon from '../../../icons/richstylingicons/removemarksicon.png'
+
 export class NoteStylingBtns extends Component {
     toggleBlock = (e, format) => {
         e.preventDefault()
@@ -21,6 +23,7 @@ export class NoteStylingBtns extends Component {
         e.preventDefault()
         this.props.toggleMark(this.props.editor, format)
     }
+   
     render() {
         return (
             <div className='notes-note-rsbtns'>
@@ -36,11 +39,13 @@ export class NoteStylingBtns extends Component {
                     onMouseDown={e => this.toggleMark(e, 'highlight')}></img>
                 <img name='strikethroughbtn' src={strikethroughIcon} alt='' 
                     onMouseDown={e => this.toggleMark(e, 'strikethrough')}></img>
+                <img name='rmvMarks' src={removeMarksIcon} alt='' 
+                    onMouseDown={e => this.props.removeAllMarks(this.props.editor)}></img>
                 <img name='ulbtn' src={ulIcon} alt='' 
                     onMouseDown={e => this.toggleBlock(e, 'unordered-list')}></img>
                 <img name='olbtn' src={olIcon} alt='' 
                     onMouseDown={e => this.toggleBlock(e, 'ordered-list')}></img>
-                <img name='olbtn' src={clIcon} alt='' 
+                <img name='clbtn' src={clIcon} alt='' 
                     onMouseDown={e => this.toggleBlock(e, 'check-list')}></img>
             </div>
         )

@@ -6,6 +6,8 @@ import { lockNote } from '../../../actions/notesActions'
 import NoteDeleteBtn from './noteButtons/NoteDeleteBtn'
 import NoteMoveBtns from './noteButtons/NoteMoveBtns'
 
+import NoteStylingBtns from './NoteStylingBtns'
+
 import btnsUnlocked from '../../../icons/btnsunlocked.png'
 import btnsLocked from '../../../icons/btnslocked.png'
 
@@ -35,6 +37,15 @@ export class NoteBtns extends Component {
                 <div>
                     <NoteDeleteBtn note={this.props.note}/>
                     <NoteMoveBtns note={this.props.note} />
+                    <NoteStylingBtns 
+                        note={this.props.note}
+                        editor={this.props.editor} 
+                        toggleBlock={this.props.toggleBlock} 
+                        toggleMark={this.props.toggleMark}
+                        isBlockActive={this.props.isBlockActive}
+                        isMarkActive={this.props.isMarkActive}
+                        removeAllMarks={this.props.removeAllMarks}
+                    />            
                 </div>
             )
         } else {

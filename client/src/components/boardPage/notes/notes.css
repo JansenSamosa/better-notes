@@ -23,7 +23,6 @@
     overflow: hidden;
 }
 .notes-note-rsbtns img {
-
     width: 13px;
     height: 13px;
     padding:5px;
@@ -36,9 +35,9 @@
     animation-duration: 500ms;
 }
 @keyframes slideInRSBtns {
-    0% {left: 250px; opacity: 0%;}
-    70% {opacity: 20%;}
-    100% {left: 0px; opacity: 100%;}
+    0% {left: 250px; opacity: 0;}
+    70% {opacity: .2;}
+    100% {left: 0px; opacity: 1;}
 }
 .notes-note-rsbtns img[name='rmvMarks'] {
     width:9px;

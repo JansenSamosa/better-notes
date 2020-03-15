@@ -19,6 +19,8 @@ export class imgBlock extends Component {
         if(imgwidth === undefined) {
             imgwidth = 500
         }
+        if(imgwidth > window.innerWidth - 50) imgwidth = window.innerWidth - 50
+
         this.state = {
             imgsrc,
             imgwidth
@@ -55,6 +57,7 @@ export class imgBlock extends Component {
     }
 
     dragEnd = e => {
+        document.body.style.overflow = 'auto'
         const path = ReactEditor.findPath(this.props.editor, this.props.element)
         Transforms.setNodes(
             this.props.editor,
@@ -63,6 +66,7 @@ export class imgBlock extends Component {
         )
     }
     drag = e => {
+        document.body.style.overflow = 'hidden'
         e.persist()
         let newWidth = this.state.imgwidth
 

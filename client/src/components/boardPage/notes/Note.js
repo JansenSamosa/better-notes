@@ -8,6 +8,7 @@ import { saveNote } from '../../../actions/notesActions'
 
 import NoteBtns from './NoteBtns'
 import ChecklistBlock from './customBlocks/checklistBlock'
+import ImgBlock from './customBlocks/imgBlock'
 
 import './notes.css'
 
@@ -17,7 +18,8 @@ const LIST_TYPES = ['unordered-list', 'ordered-list', 'check-list']
 const MARK_TYPES = ['bold', 'italic', 'underline', 'highlight', 'strikethrough', 'header']
 
 const Note = (props) => {
-    const editor = useMemo(() => withLinks(withHistory(withReact(createEditor()))), [])
+    const editor = useMemo(() => editorOptions(withLinks(withHistory(withReact(createEditor())))), [])
+
     const [value, setValue] = useState(
         JSON.parse(props.note.content.slateValue) || [
         {
@@ -25,13 +27,16 @@ const Note = (props) => {
             children:[{ text: 'Hello World'}]
         }
     ])
-    const renderElement = useCallback(props => {
-        return <Element {...props} editor={editor}/>
+
+    const [locked, setLocked] = useState(props.locked)
+
+    const renderElement = useCallback(blockprops => {
+        return <Element {...blockprops} {...props} locked={locked} editor={editor}/>
     }, [])
     const renderLeaf = useCallback(props => {
         return <Leaf {...props} />
     }, [])
-    console.log(props)
+
     return (
         
         <Slate 
@@ -44,13 +49,16 @@ const Note = (props) => {
             >
             <div className='notes-note'>
                 <NoteBtns 
+                    setLocked={setLocked}
                     note={props.note}
                     editor={editor} 
                     toggleBlock={toggleBlock} 
                     toggleMark={toggleMark}
                     isBlockActive={isBlockActive}
                     isMarkActive={isMarkActive}
-                    removeAllMarks={removeAllMarks} />
+                    removeAllMarks={removeAllMarks} 
+                    insertImage={insertImage}
+                />
                 <Editable
                     autoFocus
                     spellCheck={false}
@@ -75,6 +83,9 @@ const keyBindings = (e, editor) => {
     }
     if(e.ctrlKey) {
         switch(key) {
+            case 'y':
+                e.preventDefault()
+                return insertImage(editor)
             case 'l':
                 e.preventDefault()
                 return toggleBlock(editor, 'unordered-list')
@@ -110,7 +121,7 @@ const keyBindings = (e, editor) => {
     }
 }
 
-const Element = props => {
+const Element = (props) => {
     switch(props.element.type) {
         case 'link':
             return <a 
@@ -131,6 +142,8 @@ const Element = props => {
             return <ol {...props.attributes}>{props.children}</ol>
         case 'check-list':
             return <ul {...props.attributes}>{props.children}</ul>
+        case 'image':
+            return <ImgBlock {...props} editor={props.editor} locked={props.locked}/>
         default:
             return <p {...props.attributes}>{props.children}</p>
     }
@@ -272,5 +285,20 @@ const wrapLink = (editor, url) => {
         Transforms.wrapNodes(editor, link, { split: true })
         Transforms.collapse(editor, { edge: 'end' })
       }
+}
+
+const insertImage = (editor) => {
+    Transforms.insertNodes(editor, {type: 'image', imgsrc: 'https://webkit.org/demos/srcset/image-src.png',children: [{ text: ''}]})
+    Transforms.insertNodes(editor, {type: 'paragraph', children: [{ text: ''}]})
+}
+
+const editorOptions = editor => {
+    const { isVoid } = editor
+
+    editor.isVoid = element => {
+        return element.type === 'image' ? true : isVoid(element)
+    }
+
+    return editor
 }
 export default connect(null, { saveNote })(Note)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import {Transforms} from 'slate'
+import { Transforms } from 'slate'
 import { ReactEditor } from 'slate-react'
 
 import './customBlocks.css'
@@ -28,13 +28,8 @@ export class checklistBlock extends Component {
         if(this.state.checked) img = checkImg
         return img
     }
-    render() {
-        return (
-            <div className='block-check-list-item'> 
-                <li {...this.props.attributes}>
-                    {this.props.children}
-                </li>
-                <img 
+    getCheckBox = () => {
+        return <img 
                     type='checkbox' 
                     src={this.getChecked()}
                     alt=''
@@ -42,6 +37,14 @@ export class checklistBlock extends Component {
                     checked={this.state.checked} 
                     onClick={() => this.setState({checked: !this.state.checked})}
                 />
+    }
+    render() {
+        return (
+            <div className='block-check-list-item'> 
+                <li {...this.props.attributes}>
+                    {this.props.children}
+                </li>
+                {this.getCheckBox()}
             </div>
         )
     }

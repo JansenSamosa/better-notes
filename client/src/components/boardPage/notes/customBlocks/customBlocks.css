@@ -19,3 +19,33 @@
     background-color: rgb(233, 233, 233);
 }
 
+.note-image {
+    position: relative;
+}
+.note-image .displayImg {
+    max-width: 100%;
+}
+.note-image .imgBtn {
+    position: absolute;
+    width:20px;
+    height:20px;
+    cursor: pointer;
+    top:3px;
+    transition: all 100ms
+}
+.note-image .imgBtn[name='sizeUp'] {
+    position: absolute;
+    left:25px;
+}
+.note-image .imgBtn[name='sizeDown'] {
+    position: absolute;
+    left:45px;
+}
+.note-image .imgBtn[name='changeImg'] {
+    position: absolute;
+    left:3px;
+}
+.note-image .imgBtn:active {
+    width:25px;
+    height:25px;
+}

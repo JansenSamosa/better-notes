@@ -32,7 +32,7 @@
     cursor: pointer;
     box-shadow: 1px 1px 1px grey;
     animation-name: slideInRSBtns;
-    animation-duration: 500ms;
+    animation-duration: 300ms;
 }
 @keyframes slideInRSBtns {
     0% {left: 250px; opacity: 0;}

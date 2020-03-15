@@ -11,6 +11,7 @@ import strikethroughIcon from '../../../icons/richstylingicons/strikethroughicon
 import ulIcon from '../../../icons/richstylingicons/ulicon.png'
 import olIcon from '../../../icons/richstylingicons/olicon.png'
 import clIcon from '../../../icons/richstylingicons/clicon.png'
+import newImgIcon from '../../../icons/richstylingicons/newimgicon.png'
 
 import removeMarksIcon from '../../../icons/richstylingicons/removemarksicon.png'
 
@@ -47,6 +48,8 @@ export class NoteStylingBtns extends Component {
                     onMouseDown={e => this.toggleBlock(e, 'ordered-list')}></img>
                 <img name='clbtn' src={clIcon} alt='' 
                     onMouseDown={e => this.toggleBlock(e, 'check-list')}></img>
+                <img name='insertImg' src={newImgIcon} alt='' 
+                    onMouseDown={e => this.props.insertImage(this.props.editor)}></img>
             </div>
         )
     }

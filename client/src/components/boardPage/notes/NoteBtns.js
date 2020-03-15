@@ -23,6 +23,7 @@ export class NoteBtns extends Component {
         if(this.state.locked === false) locked = true
         if(this.state.locked === true) locked = false
         this.setState({locked})
+        this.props.setLocked(locked)
         this.props.lockNote(this.props.note.id, locked)
     }
     getToggleImg = () => {
@@ -45,6 +46,7 @@ export class NoteBtns extends Component {
                         isBlockActive={this.props.isBlockActive}
                         isMarkActive={this.props.isMarkActive}
                         removeAllMarks={this.props.removeAllMarks}
+                        insertImage={this.props.insertImage}
                     />            
                 </div>
             )

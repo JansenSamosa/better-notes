@@ -18,7 +18,7 @@ const LIST_TYPES = ['unordered-list', 'ordered-list', 'check-list']
 const MARK_TYPES = ['bold', 'italic', 'underline', 'highlight', 'strikethrough', 'header']
 
 const Note = (props) => {
-    const editor = useMemo(() => editorOptions(withLinks(withHistory(withReact(createEditor())))), [])
+    const editor = useMemo(() => editorOptions(withHistory(withReact(createEditor()))), [])
 
     const [value, setValue] = useState(
         JSON.parse(props.note.content.slateValue) || [
@@ -232,33 +232,6 @@ const isMarkActive = (editor, mark) => {
 }
 
 //Links
-const withLinks = editor => {
-    const { insertData, insertText, isInline } = editor
-  
-    editor.isInline = element => {
-      return element.type === 'link' ? true : isInline(element)
-    }
-  
-    editor.insertText = text => {
-      if (text && isUrl(text)) {
-        wrapLink(editor, text)
-      } else {
-        insertText(text)
-      }
-    }
-  
-    editor.insertData = data => {
-      const text = data.getData('text/plain')
-  
-      if (text && isUrl(text)) {
-        wrapLink(editor, text)
-      } else {
-        insertData(data)
-      }
-    }
-  
-    return editor
-}
 const isLinkActive = editor => {
     const [link] = Editor.nodes(editor, { match: n => n.type === 'link' })
     return !!link
@@ -292,13 +265,37 @@ const insertImage = (editor) => {
     Transforms.insertNodes(editor, {type: 'paragraph', children: [{ text: ''}]})
 }
 
+// editor options
 const editorOptions = editor => {
-    const { isVoid } = editor
-
+    const { isVoid, insertData, insertText, isInline } = editor
+    
     editor.isVoid = element => {
         return element.type === 'image' ? true : isVoid(element)
     }
 
+    editor.isInline = element => {
+        return element.type === 'link' ? true 
+            : isInline(element)
+    }
+  
+    editor.insertText = text => {
+      if (text && isUrl(text)) {
+        wrapLink(editor, text)
+      } else {
+        insertText(text)
+      }
+    }
+  
+    editor.insertData = data => {
+      const text = data.getData('text/plain')
+  
+      if (text && isUrl(text)) {
+        wrapLink(editor, text)
+      } else {
+        insertData(data)
+      }
+    }
+  
     return editor
 }
 export default connect(null, { saveNote })(Note)

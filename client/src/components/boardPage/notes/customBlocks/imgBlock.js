@@ -8,6 +8,7 @@ import './customBlocks.css'
 import changeimgicon from '../../../../icons/changeimgicon.png'
 import zoominicon from '../../../../icons/zoominicon.png'
 import zoomouticon from '../../../../icons/zoomouticon.png'
+import seResizeIcon from '../../../../icons/seresizeicon.png'
 
 export class imgBlock extends Component {
     constructor(props) {
@@ -22,6 +23,7 @@ export class imgBlock extends Component {
             imgsrc,
             imgwidth
         }
+        this.myRef = React.createRef()
     }
 
     changeImg = () => {
@@ -40,24 +42,19 @@ export class imgBlock extends Component {
             )}
         }
     }
-    startChangeSize = (e, mode) => {
-        let diff = 0
-        
-        if(mode === 'increase') diff = 1.01
-        if(mode === 'decrease') diff = .995
-
-        //runs size change only if left click or on mobile
-        if(e.button === 0 || e.button === undefined) {
-            this.interval = setInterval(() => {
-                let newWidth = parseInt(this.state.imgwidth) * diff;
-                if(newWidth <= 100) newWidth = 100 
-                this.setState({...this.state, imgwidth: newWidth})
-            }, 12)
-        }
+    
+    defaultImg = () => {
+        const newImgSrc = 'https://webkit.org/demos/srcset/image-src.png'
+        this.setState({...this.state, imgsrc: newImgSrc})
+        const path = ReactEditor.findPath(this.props.editor, this.props.element)
+        Transforms.setNodes(
+            this.props.editor,
+            { imgsrc: newImgSrc },
+            { at: path}
+        )
     }
 
-    endChangeSize = () => {
-        clearInterval(this.interval)
+    dragEnd = e => {
         const path = ReactEditor.findPath(this.props.editor, this.props.element)
         Transforms.setNodes(
             this.props.editor,
@@ -65,39 +62,47 @@ export class imgBlock extends Component {
             { at: path}
         )
     }
+    drag = e => {
+        e.persist()
+        let newWidth = this.state.imgwidth
+
+        let dragX = e.clientX
+
+        if(e.type === 'touchmove') dragX = e.touches[0].clientX
+
+        if(dragX !== 0) {
+            newWidth = dragX - this.myRef.getBoundingClientRect().x
+            console.log(newWidth)
+        }
+        
+        this.setState({...this.state, imgwidth: newWidth})
+    }
     render() {
         return (
             <div className='note-image' {...this.props.attributes}>
+                <div 
+                    name='sizeChange'
+                    draggable='true'  
+                    onDragEnd={e => this.dragEnd(e)}
+                    onDrag = {e => this.drag(e)}
+                    onTouchMove = {e => this.drag(e)}
+                    onTouchEnd = {e => this.dragEnd(e)}
+                    style={{left: `${this.state.imgwidth - 22}px`}}
+                    >
+                        <img 
+                            src={seResizeIcon}  
+                            alt=''
+                            draggable='false'
+                        />
+                </div>
                 <img
                     className='displayImg'
                     src={this.state.imgsrc}
                     alt='Double click this text to insert img' 
+                    onClick={e => e.preventDefault()}
                     width={`${this.state.imgwidth}px`}
+                    onError = {this.defaultImg}
                 /> 
-                <img 
-                    className='imgBtn'
-                    name='sizeUp'             
-                    draggable='false'
-                    src={zoominicon}       
-                    alt=''
-                    onMouseDown={e => this.startChangeSize(e, 'increase')} 
-                    onMouseUp={this.endChangeSize}
-                    onMouseOut={this.endChangeSize}
-                    onTouchStart={e => this.startChangeSize(e, 'increase')} 
-                    onTouchEnd={this.endChangeSize}
-                />
-                <img 
-                    className='imgBtn'
-                    name='sizeDown'  
-                    draggable='false'
-                    src={zoomouticon}       
-                    alt=''                  
-                    onMouseDown={e => this.startChangeSize(e, 'decrease')} 
-                    onMouseUp={this.endChangeSize}
-                    onMouseOut={this.endChangeSize}
-                    onTouchStart={e => this.startChangeSize(e, 'decrease')} 
-                    onTouchEnd={this.endChangeSize}
-                />
                 <img 
                     className='imgBtn'
                     name='changeImg'   
@@ -105,7 +110,9 @@ export class imgBlock extends Component {
                     src={changeimgicon}       
                     alt=''                 
                     onClick={this.changeImg}
+                    ref = {e => this.myRef = e}    
                 />
+                
                 {this.props.children}
             </div>
         )

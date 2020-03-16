@@ -44,7 +44,7 @@
 .note-image div[name='sizeChange'] {
     position: absolute;
     right: 0;
-    bottom: 7px;
+    bottom: 3px;
     width:20px;
     height:20px;
     cursor: se-resize;
@@ -53,6 +53,6 @@
     cursor: none;
 }
 .note-image div[name='sizeChange'] img{
-    width:25px;
-    height:25px;
+    width:15px;
+    height:15px;
 }

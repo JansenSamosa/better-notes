@@ -91,7 +91,7 @@ export class imgBlock extends Component {
                     onDrag = {e => this.drag(e)}
                     onTouchMove = {e => this.drag(e)}
                     onTouchEnd = {e => this.dragEnd(e)}
-                    style={{left: `${this.state.imgwidth - 22}px`}}
+                    style={{left: `${this.state.imgwidth - 16}px`}}
                     >
                         <img 
                             src={seResizeIcon}  

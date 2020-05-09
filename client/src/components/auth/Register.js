@@ -24,7 +24,7 @@ export class Register extends Component {
         }
         else {
             const newUser = {
-                email: this.state.email,
+                email: this.state.email.toLowerCase(),
                 password: this.state.password
             }
 
